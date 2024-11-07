@@ -1,3 +1,7 @@
+### IMPORTANT ###
+-Add course text insertion
+
+### GENERAL ###
 -Add opencv font choice for the user.
     - FONT_ITALIC 
     - FONT_HERSHEY_SCRIPT_COMPLEX
