@@ -20,12 +20,12 @@ def generate_certs():
         print('Folder for generated certificates was not found.\n')
         print('Folder for generated certificates was created.\n')
 
-    template_path = "cert-templates/template1.jpg"
+    template_path = "cert-templates/template-cert.png"
     if not os.path.exists(template_path):
         print(f"Error: Template not found in {template_path}")
         return
 
-    template = cv2.imread("cert-templates/template1.jpg")
+    template = cv2.imread("cert-templates/template-cert.png")
     if template is None:
         print(f"Error: Unable to read template file at {template_path}")
         return
@@ -35,8 +35,10 @@ def generate_certs():
         try:
             cert = template.copy()
             
-            output_path = os.path.join('generated-certs', f'{name}.jpg')
-            cv2.putText(cert, name, (815, 1500), cv2.FONT_HERSHEY_SIMPLEX, 5, (0, 0, 255), 5, cv2.LINE_AA)
+            output_path = os.path.join('generated-certs', f'{name}.png')
+            # putText parameters:
+            # (img to be used, string to insert, coordinate tuple, font, font scale, BGR color tuple, thickness, line type)
+            cv2.putText(cert, name, (515, 570), cv2.FONT_HERSHEY_SCRIPT_SIMPLEX, 3, (0, 0, 0), 5, cv2.LINE_AA)
             cv2.imwrite(output_path, cert)
             print(f'Certificate for {name} generated.')
         except Exception as e:
