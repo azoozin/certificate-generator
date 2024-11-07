@@ -29,15 +29,21 @@ def generate_certs(font_scale, template_file):
         print(f"Error: Unable to read template file at {template_path}")
         return
 
-
+    template_height, template_width = template.shape[:2]
     for name in name_list:
         try:
             cert = template.copy()
+
+            text_size = cv2.getTextSize(name, cv2.FONT_HERSHEY_SCRIPT_SIMPLEX, font_scale, 2)[0]
+            
+            text_x = (template_width - text_size[0]) // 2
+            text_y = 570
             
             output_path = os.path.join('generated-certs', f'{name}.png')
             # putText parameters:
             # (img to be used, string to insert, coordinate tuple, font, font scale, BGR color tuple, thickness, line type)
-            cv2.putText(cert, name, (515, 570), cv2.FONT_HERSHEY_SCRIPT_SIMPLEX, font_scale, (0, 0, 0), 5, cv2.LINE_AA)
+            # cv2.putText(cert, name, (515, 570), cv2.FONT_HERSHEY_SCRIPT_SIMPLEX, font_scale, (0, 0, 0), 2, cv2.LINE_AA)
+            cv2.putText(cert, name, (text_x, text_y), cv2.FONT_HERSHEY_SCRIPT_SIMPLEX, font_scale, (0, 0, 0), 2, cv2.LINE_AA)
             cv2.imwrite(output_path, cert)
             print(f'Certificate for {name} generated.')
         except Exception as e:
