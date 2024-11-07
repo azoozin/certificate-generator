@@ -8,7 +8,6 @@ def data_cleanup():
     try:
         with open("name-list.txt") as file:
             for line in file:
-                # print(line.strip())
                 name_list.append(line.strip())
             print(f'{len(name_list)} names have been loaded.\n')
     except FileNotFoundError:
@@ -43,6 +42,3 @@ def generate_certs(font_scale, template_file):
             print(f'Certificate for {name} generated.')
         except Exception as e:
             print(f'Error: Could not generate certificate for {name}: {str(e)}')
-
-# data_cleanup()
-# generate_certs()
